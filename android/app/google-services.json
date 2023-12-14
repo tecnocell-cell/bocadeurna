@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "739370417054",
+    "project_id": "pesquisaeleitoral-d19b3",
+    "storage_bucket": "pesquisaeleitoral-d19b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739370417054:android:d373b4b6ec9c6b4a68b48f",
+        "android_client_info": {
+          "package_name": "Robin.Job.Posts"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEaHRzx4T-yGifHgKf9nZ71ZfGLV4Bq3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

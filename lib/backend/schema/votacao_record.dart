@@ -1,0 +1,169 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
+import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+
+class VotacaoRecord extends FirestoreRecord {
+  VotacaoRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
+
+  // "eleitor" field.
+  DocumentReference? _eleitor;
+  DocumentReference? get eleitor => _eleitor;
+  bool hasEleitor() => _eleitor != null;
+
+  // "popularidade" field.
+  DocumentReference? _popularidade;
+  DocumentReference? get popularidade => _popularidade;
+  bool hasPopularidade() => _popularidade != null;
+
+  // "votoEspontaneo" field.
+  String? _votoEspontaneo;
+  String get votoEspontaneo => _votoEspontaneo ?? '';
+  bool hasVotoEspontaneo() => _votoEspontaneo != null;
+
+  // "votoEstimulado" field.
+  String? _votoEstimulado;
+  String get votoEstimulado => _votoEstimulado ?? '';
+  bool hasVotoEstimulado() => _votoEstimulado != null;
+
+  // "naoVotaria" field.
+  String? _naoVotaria;
+  String get naoVotaria => _naoVotaria ?? '';
+  bool hasNaoVotaria() => _naoVotaria != null;
+
+  // "achaQVaiVencer" field.
+  String? _achaQVaiVencer;
+  String get achaQVaiVencer => _achaQVaiVencer ?? '';
+  bool hasAchaQVaiVencer() => _achaQVaiVencer != null;
+
+  // "votoVereador" field.
+  String? _votoVereador;
+  String get votoVereador => _votoVereador ?? '';
+  bool hasVotoVereador() => _votoVereador != null;
+
+  // "comparaVoto" field.
+  String? _comparaVoto;
+  String get comparaVoto => _comparaVoto ?? '';
+  bool hasComparaVoto() => _comparaVoto != null;
+
+  // "votoMudar" field.
+  String? _votoMudar;
+  String get votoMudar => _votoMudar ?? '';
+  bool hasVotoMudar() => _votoMudar != null;
+
+  void _initializeFields() {
+    _eleitor = snapshotData['eleitor'] as DocumentReference?;
+    _popularidade = snapshotData['popularidade'] as DocumentReference?;
+    _votoEspontaneo = snapshotData['votoEspontaneo'] as String?;
+    _votoEstimulado = snapshotData['votoEstimulado'] as String?;
+    _naoVotaria = snapshotData['naoVotaria'] as String?;
+    _achaQVaiVencer = snapshotData['achaQVaiVencer'] as String?;
+    _votoVereador = snapshotData['votoVereador'] as String?;
+    _comparaVoto = snapshotData['comparaVoto'] as String?;
+    _votoMudar = snapshotData['votoMudar'] as String?;
+  }
+
+  static CollectionReference get collection =>
+      FirebaseFirestore.instance.collection('votacao');
+
+  static Stream<VotacaoRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => VotacaoRecord.fromSnapshot(s));
+
+  static Future<VotacaoRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => VotacaoRecord.fromSnapshot(s));
+
+  static VotacaoRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      VotacaoRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
+
+  static VotacaoRecord getDocumentFromData(
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      VotacaoRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'VotacaoRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is VotacaoRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
+}
+
+Map<String, dynamic> createVotacaoRecordData({
+  DocumentReference? eleitor,
+  DocumentReference? popularidade,
+  String? votoEspontaneo,
+  String? votoEstimulado,
+  String? naoVotaria,
+  String? achaQVaiVencer,
+  String? votoVereador,
+  String? comparaVoto,
+  String? votoMudar,
+}) {
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'eleitor': eleitor,
+      'popularidade': popularidade,
+      'votoEspontaneo': votoEspontaneo,
+      'votoEstimulado': votoEstimulado,
+      'naoVotaria': naoVotaria,
+      'achaQVaiVencer': achaQVaiVencer,
+      'votoVereador': votoVereador,
+      'comparaVoto': comparaVoto,
+      'votoMudar': votoMudar,
+    }.withoutNulls,
+  );
+
+  return firestoreData;
+}
+
+class VotacaoRecordDocumentEquality implements Equality<VotacaoRecord> {
+  const VotacaoRecordDocumentEquality();
+
+  @override
+  bool equals(VotacaoRecord? e1, VotacaoRecord? e2) {
+    return e1?.eleitor == e2?.eleitor &&
+        e1?.popularidade == e2?.popularidade &&
+        e1?.votoEspontaneo == e2?.votoEspontaneo &&
+        e1?.votoEstimulado == e2?.votoEstimulado &&
+        e1?.naoVotaria == e2?.naoVotaria &&
+        e1?.achaQVaiVencer == e2?.achaQVaiVencer &&
+        e1?.votoVereador == e2?.votoVereador &&
+        e1?.comparaVoto == e2?.comparaVoto &&
+        e1?.votoMudar == e2?.votoMudar;
+  }
+
+  @override
+  int hash(VotacaoRecord? e) => const ListEquality().hash([
+        e?.eleitor,
+        e?.popularidade,
+        e?.votoEspontaneo,
+        e?.votoEstimulado,
+        e?.naoVotaria,
+        e?.achaQVaiVencer,
+        e?.votoVereador,
+        e?.comparaVoto,
+        e?.votoMudar
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is VotacaoRecord;
+}
