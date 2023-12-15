@@ -69,7 +69,7 @@ class _VotoVereadorWidgetState extends State<VotoVereadorWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+            padding: EdgeInsets.all(16.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -120,8 +120,7 @@ class _VotoVereadorWidgetState extends State<VotoVereadorWidget> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              4.0, 4.0, 4.0, 4.0),
+                          padding: EdgeInsets.all(4.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
