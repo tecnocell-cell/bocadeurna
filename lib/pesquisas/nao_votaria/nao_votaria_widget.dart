@@ -7,25 +7,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'acha_q_vai_vencer_model.dart';
-export 'acha_q_vai_vencer_model.dart';
+import 'nao_votaria_model.dart';
+export 'nao_votaria_model.dart';
 
-class AchaQVaiVencerWidget extends StatefulWidget {
-  const AchaQVaiVencerWidget({Key? key}) : super(key: key);
+class NaoVotariaWidget extends StatefulWidget {
+  const NaoVotariaWidget({Key? key}) : super(key: key);
 
   @override
-  _AchaQVaiVencerWidgetState createState() => _AchaQVaiVencerWidgetState();
+  _NaoVotariaWidgetState createState() => _NaoVotariaWidgetState();
 }
 
-class _AchaQVaiVencerWidgetState extends State<AchaQVaiVencerWidget> {
-  late AchaQVaiVencerModel _model;
+class _NaoVotariaWidgetState extends State<NaoVotariaWidget> {
+  late NaoVotariaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AchaQVaiVencerModel());
+    _model = createModel(context, () => NaoVotariaModel());
   }
 
   @override
@@ -55,7 +55,7 @@ class _AchaQVaiVencerWidgetState extends State<AchaQVaiVencerWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         title: Text(
-          'Enquetes - Espontânea',
+          'Rejeição',
           style: FlutterFlowTheme.of(context).headlineSmall.override(
                 fontFamily: 'Outfit',
                 color: FlutterFlowTheme.of(context).tertiary,
@@ -75,7 +75,7 @@ class _AchaQVaiVencerWidgetState extends State<AchaQVaiVencerWidget> {
               children: [
                 Flexible(
                   child: Text(
-                    'Em quem você pretende votar na próxima eleição para prefeito em Santa Maria das Barreiras?',
+                    'Qual dos candidatos abaixo você não votaria para prefeito em Santa Maria das Barreiras ?',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Outfit',
                           fontSize: 18.0,
@@ -115,85 +115,98 @@ class _AchaQVaiVencerWidgetState extends State<AchaQVaiVencerWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
                             color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                                FFAppState().espontanea == candidatosItem.nome
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : Color(0x00000000),
                             width: 1.0,
                           ),
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(4.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Container(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Image.network(
-                                    candidatosItem.foto,
-                                    fit: BoxFit.fitHeight,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                FFAppState().naoVotaria = candidatosItem.nome;
+                              });
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: Container(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.network(
+                                      candidatosItem.foto,
+                                      fit: BoxFit.fitHeight,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 0.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      candidatosItem.nome,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 4.0, 0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            candidatosItem.preteCargo,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    4.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              candidatosItem.partido
-                                                  .maybeHandleOverflow(
-                                                maxChars: 16,
-                                                replacement: '…',
-                                              ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        candidatosItem.nome,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 4.0, 0.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              candidatosItem.preteCargo,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodySmall
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        fontSize: 12.0,
-                                                      ),
+                                                      .bodySmall,
                                             ),
-                                          ),
-                                        ],
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(4.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                candidatosItem.partido
+                                                    .maybeHandleOverflow(
+                                                  maxChars: 16,
+                                                  replacement: '…',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          fontSize: 12.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -210,8 +223,8 @@ class _AchaQVaiVencerWidgetState extends State<AchaQVaiVencerWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed('votoVereador');
                   },
                   text: 'Prosseguir',
                   options: FFButtonOptions(

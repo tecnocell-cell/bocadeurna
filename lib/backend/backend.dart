@@ -9,8 +9,8 @@ import 'schema/users_record.dart';
 import 'schema/candidatos_record.dart';
 import 'schema/eleitores_record.dart';
 import 'schema/popularidade_record.dart';
-import 'schema/segundo_quadro_record.dart';
 import 'schema/votacao_record.dart';
+import 'schema/intencao_voto_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,8 +22,8 @@ export 'schema/users_record.dart';
 export 'schema/candidatos_record.dart';
 export 'schema/eleitores_record.dart';
 export 'schema/popularidade_record.dart';
-export 'schema/segundo_quadro_record.dart';
 export 'schema/votacao_record.dart';
+export 'schema/intencao_voto_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -173,43 +173,6 @@ Future<List<PopularidadeRecord>> queryPopularidadeRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query SegundoQuadroRecords (as a Stream and as a Future).
-Future<int> querySegundoQuadroRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      SegundoQuadroRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<SegundoQuadroRecord>> querySegundoQuadroRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      SegundoQuadroRecord.collection,
-      SegundoQuadroRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<SegundoQuadroRecord>> querySegundoQuadroRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      SegundoQuadroRecord.collection,
-      SegundoQuadroRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query VotacaoRecords (as a Stream and as a Future).
 Future<int> queryVotacaoRecordCount({
   Query Function(Query)? queryBuilder,
@@ -242,6 +205,43 @@ Future<List<VotacaoRecord>> queryVotacaoRecordOnce({
     queryCollectionOnce(
       VotacaoRecord.collection,
       VotacaoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query IntencaoVotoRecords (as a Stream and as a Future).
+Future<int> queryIntencaoVotoRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      IntencaoVotoRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<IntencaoVotoRecord>> queryIntencaoVotoRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      IntencaoVotoRecord.collection,
+      IntencaoVotoRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<IntencaoVotoRecord>> queryIntencaoVotoRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      IntencaoVotoRecord.collection,
+      IntencaoVotoRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

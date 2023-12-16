@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -92,7 +94,7 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
               child: Text(
-                'Em relaçao a sua Intenção de voto, você diria que até o dia da eleição...',
+                'Em relaçao a sua Intenção de voto, você diria que até o dia da eleição ela poderia mudar?',
                 style: FlutterFlowTheme.of(context).labelMedium.override(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
@@ -117,7 +119,7 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           FlutterFlowDropDown<String>(
-                            controller: _model.dropDownValueController ??=
+                            controller: _model.opValueController ??=
                                 FormFieldController<String>(null),
                             options: [
                               'Ela é definitiva.',
@@ -126,11 +128,62 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
                               'Não sabe.'
                             ],
                             onChanged: (val) =>
-                                setState(() => _model.dropDownValue = val),
+                                setState(() => _model.opValue = val),
                             width: 359.0,
                             height: 50.0,
                             textStyle: FlutterFlowTheme.of(context).bodyMedium,
                             hintText: 'Selecione a Opção...',
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            elevation: 2.0,
+                            borderColor: FlutterFlowTheme.of(context).alternate,
+                            borderWidth: 2.0,
+                            borderRadius: 8.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 4.0, 16.0, 4.0),
+                            hidesUnderline: true,
+                            isOverButton: true,
+                            isSearchable: false,
+                            isMultiSelect: false,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FlutterFlowDropDown<String>(
+                            controller: _model.localdadeValueController ??=
+                                FormFieldController<String>(null),
+                            options: [
+                              'Casa de Tábua',
+                              'Agrovila',
+                              'Nova Esperança',
+                              'Serra Azul',
+                              'Coodespar',
+                              'Rio Preto',
+                              'Santa Maria'
+                            ],
+                            onChanged: (val) =>
+                                setState(() => _model.localdadeValue = val),
+                            width: 359.0,
+                            height: 50.0,
+                            textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                            hintText: 'Selecione a Localidade...',
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -167,7 +220,35 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('satisfacao3');
+                        setState(() {
+                          FFAppState().addToIntencaoVoto(IntencaoVotoStruct(
+                            pretendeVotarEspontanea: FFAppState().espontanea,
+                            pretendeVotaEstimulada: FFAppState().estimulada,
+                            naoVotaria: FFAppState().naoVotaria,
+                            achaqVaiVencer: FFAppState().achaQVaiVencer,
+                            votoVereador: FFAppState().vereador,
+                          ));
+                        });
+                        setState(() {
+                          FFAppState().addToVotacao(VotacaoStruct(
+                            pretendeVotarEspontanea: FFAppState().espontanea,
+                            pretendeVotarEstimulada: FFAppState().estimulada,
+                            naoVotaria: FFAppState().naoVotaria,
+                            achaQVaiVencer: FFAppState().achaQVaiVencer,
+                            votoVereador: FFAppState().vereador,
+                            emQuemVotaria: FFAppState().qd2Primeiro,
+                            votoMudar: _model.opValue,
+                            agenteDePesquisa: currentUserDisplayName,
+                            emQuemVotaria2: FFAppState().qd2Segundo,
+                            localidade: _model.localdadeValue,
+                            eleitor: FFAppState().eleitor,
+                            popularidade: FFAppState().satisfacao1,
+                            emailEleitor: FFAppState().emailEleitor,
+                            telefoneEleitor: FFAppState().telefoneEleitor,
+                          ));
+                        });
+
+                        context.pushNamed('Onboarding');
                       },
                       text: 'Enviar Pesquisa',
                       options: FFButtonOptions(

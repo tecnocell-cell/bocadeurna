@@ -91,13 +91,6 @@ class _SatisfacaoWidgetState extends State<SatisfacaoWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
                 child: Text(
-                  'Pesquisa de Satisfação',
-                  style: FlutterFlowTheme.of(context).headlineMedium,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
-                child: Text(
                   '1.\nComo você se sente a respeito da direção geral do nosso país no momento?',
                   style: FlutterFlowTheme.of(context).labelMedium.override(
                         fontFamily: 'Poppins',

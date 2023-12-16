@@ -272,32 +272,8 @@ class _LogarWidgetState extends State<LogarWidget> {
                           20.0, 12.0, 20.0, 16.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FFButtonWidget(
-                            onPressed: () {
-                              print('ButtonForgotPassword pressed ...');
-                            },
-                            text: 'Recuperar Senha?',
-                            options: FFButtonOptions(
-                              width: 140.0,
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              textStyle:
-                                  FlutterFlowTheme.of(context).bodyMedium,
-                              elevation: 0.0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                          ),
                           FFButtonWidget(
                             onPressed: () async {
                               GoRouter.of(context).prepareAuthEvent();
@@ -312,11 +288,11 @@ class _LogarWidgetState extends State<LogarWidget> {
                               }
 
                               context.goNamedAuth(
-                                  'satisfacao', context.mounted);
+                                  'espontanea', context.mounted);
                             },
                             text: 'Logar',
                             options: FFButtonOptions(
-                              width: 130.0,
+                              width: 250.0,
                               height: 50.0,
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
@@ -347,46 +323,6 @@ class _LogarWidgetState extends State<LogarWidget> {
                       indent: 20.0,
                       endIndent: 20.0,
                       color: FlutterFlowTheme.of(context).lineColor,
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 8.0, 0.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              context.pushNamed('Registro');
-                            },
-                            text: 'Criar Conta',
-                            options: FFButtonOptions(
-                              width: 140.0,
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    fontSize: 14.0,
-                                  ),
-                              elevation: 0.0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

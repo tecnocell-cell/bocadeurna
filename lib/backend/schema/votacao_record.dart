@@ -16,16 +16,6 @@ class VotacaoRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "eleitor" field.
-  DocumentReference? _eleitor;
-  DocumentReference? get eleitor => _eleitor;
-  bool hasEleitor() => _eleitor != null;
-
-  // "popularidade" field.
-  DocumentReference? _popularidade;
-  DocumentReference? get popularidade => _popularidade;
-  bool hasPopularidade() => _popularidade != null;
-
   // "votoEspontaneo" field.
   String? _votoEspontaneo;
   String get votoEspontaneo => _votoEspontaneo ?? '';
@@ -61,9 +51,42 @@ class VotacaoRecord extends FirestoreRecord {
   String get votoMudar => _votoMudar ?? '';
   bool hasVotoMudar() => _votoMudar != null;
 
+  // "localidade" field.
+  String? _localidade;
+  String get localidade => _localidade ?? '';
+  bool hasLocalidade() => _localidade != null;
+
+  // "agenteDePesquisa" field.
+  String? _agenteDePesquisa;
+  String get agenteDePesquisa => _agenteDePesquisa ?? '';
+  bool hasAgenteDePesquisa() => _agenteDePesquisa != null;
+
+  // "comparaVoto2" field.
+  String? _comparaVoto2;
+  String get comparaVoto2 => _comparaVoto2 ?? '';
+  bool hasComparaVoto2() => _comparaVoto2 != null;
+
+  // "eleitor" field.
+  String? _eleitor;
+  String get eleitor => _eleitor ?? '';
+  bool hasEleitor() => _eleitor != null;
+
+  // "popularidade" field.
+  String? _popularidade;
+  String get popularidade => _popularidade ?? '';
+  bool hasPopularidade() => _popularidade != null;
+
+  // "emailEleitor" field.
+  String? _emailEleitor;
+  String get emailEleitor => _emailEleitor ?? '';
+  bool hasEmailEleitor() => _emailEleitor != null;
+
+  // "telefoneEleitor" field.
+  String? _telefoneEleitor;
+  String get telefoneEleitor => _telefoneEleitor ?? '';
+  bool hasTelefoneEleitor() => _telefoneEleitor != null;
+
   void _initializeFields() {
-    _eleitor = snapshotData['eleitor'] as DocumentReference?;
-    _popularidade = snapshotData['popularidade'] as DocumentReference?;
     _votoEspontaneo = snapshotData['votoEspontaneo'] as String?;
     _votoEstimulado = snapshotData['votoEstimulado'] as String?;
     _naoVotaria = snapshotData['naoVotaria'] as String?;
@@ -71,6 +94,13 @@ class VotacaoRecord extends FirestoreRecord {
     _votoVereador = snapshotData['votoVereador'] as String?;
     _comparaVoto = snapshotData['comparaVoto'] as String?;
     _votoMudar = snapshotData['votoMudar'] as String?;
+    _localidade = snapshotData['localidade'] as String?;
+    _agenteDePesquisa = snapshotData['agenteDePesquisa'] as String?;
+    _comparaVoto2 = snapshotData['comparaVoto2'] as String?;
+    _eleitor = snapshotData['eleitor'] as String?;
+    _popularidade = snapshotData['popularidade'] as String?;
+    _emailEleitor = snapshotData['emailEleitor'] as String?;
+    _telefoneEleitor = snapshotData['telefoneEleitor'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -108,8 +138,6 @@ class VotacaoRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createVotacaoRecordData({
-  DocumentReference? eleitor,
-  DocumentReference? popularidade,
   String? votoEspontaneo,
   String? votoEstimulado,
   String? naoVotaria,
@@ -117,11 +145,16 @@ Map<String, dynamic> createVotacaoRecordData({
   String? votoVereador,
   String? comparaVoto,
   String? votoMudar,
+  String? localidade,
+  String? agenteDePesquisa,
+  String? comparaVoto2,
+  String? eleitor,
+  String? popularidade,
+  String? emailEleitor,
+  String? telefoneEleitor,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'eleitor': eleitor,
-      'popularidade': popularidade,
       'votoEspontaneo': votoEspontaneo,
       'votoEstimulado': votoEstimulado,
       'naoVotaria': naoVotaria,
@@ -129,6 +162,13 @@ Map<String, dynamic> createVotacaoRecordData({
       'votoVereador': votoVereador,
       'comparaVoto': comparaVoto,
       'votoMudar': votoMudar,
+      'localidade': localidade,
+      'agenteDePesquisa': agenteDePesquisa,
+      'comparaVoto2': comparaVoto2,
+      'eleitor': eleitor,
+      'popularidade': popularidade,
+      'emailEleitor': emailEleitor,
+      'telefoneEleitor': telefoneEleitor,
     }.withoutNulls,
   );
 
@@ -140,28 +180,38 @@ class VotacaoRecordDocumentEquality implements Equality<VotacaoRecord> {
 
   @override
   bool equals(VotacaoRecord? e1, VotacaoRecord? e2) {
-    return e1?.eleitor == e2?.eleitor &&
-        e1?.popularidade == e2?.popularidade &&
-        e1?.votoEspontaneo == e2?.votoEspontaneo &&
+    return e1?.votoEspontaneo == e2?.votoEspontaneo &&
         e1?.votoEstimulado == e2?.votoEstimulado &&
         e1?.naoVotaria == e2?.naoVotaria &&
         e1?.achaQVaiVencer == e2?.achaQVaiVencer &&
         e1?.votoVereador == e2?.votoVereador &&
         e1?.comparaVoto == e2?.comparaVoto &&
-        e1?.votoMudar == e2?.votoMudar;
+        e1?.votoMudar == e2?.votoMudar &&
+        e1?.localidade == e2?.localidade &&
+        e1?.agenteDePesquisa == e2?.agenteDePesquisa &&
+        e1?.comparaVoto2 == e2?.comparaVoto2 &&
+        e1?.eleitor == e2?.eleitor &&
+        e1?.popularidade == e2?.popularidade &&
+        e1?.emailEleitor == e2?.emailEleitor &&
+        e1?.telefoneEleitor == e2?.telefoneEleitor;
   }
 
   @override
   int hash(VotacaoRecord? e) => const ListEquality().hash([
-        e?.eleitor,
-        e?.popularidade,
         e?.votoEspontaneo,
         e?.votoEstimulado,
         e?.naoVotaria,
         e?.achaQVaiVencer,
         e?.votoVereador,
         e?.comparaVoto,
-        e?.votoMudar
+        e?.votoMudar,
+        e?.localidade,
+        e?.agenteDePesquisa,
+        e?.comparaVoto2,
+        e?.eleitor,
+        e?.popularidade,
+        e?.emailEleitor,
+        e?.telefoneEleitor
       ]);
 
   @override

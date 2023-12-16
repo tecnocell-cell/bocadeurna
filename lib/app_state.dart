@@ -66,21 +66,6 @@ class FFAppState extends ChangeNotifier {
           _intencaoVoto;
     });
     _safeInit(() {
-      _segundoQuadro = prefs
-              .getStringList('ff_segundoQuadro')
-              ?.map((x) {
-                try {
-                  return SegundoQuadroStruct.fromSerializableMap(jsonDecode(x));
-                } catch (e) {
-                  print("Can't decode persisted data type. Error: $e.");
-                  return null;
-                }
-              })
-              .withoutNulls
-              .toList() ??
-          _segundoQuadro;
-    });
-    _safeInit(() {
       _socioEconoico = prefs
               .getStringList('ff_socioEconoico')
               ?.map((x) {
@@ -252,47 +237,6 @@ class FFAppState extends ChangeNotifier {
         'ff_intencaoVoto', _intencaoVoto.map((x) => x.serialize()).toList());
   }
 
-  List<SegundoQuadroStruct> _segundoQuadro = [];
-  List<SegundoQuadroStruct> get segundoQuadro => _segundoQuadro;
-  set segundoQuadro(List<SegundoQuadroStruct> _value) {
-    _segundoQuadro = _value;
-    prefs.setStringList(
-        'ff_segundoQuadro', _value.map((x) => x.serialize()).toList());
-  }
-
-  void addToSegundoQuadro(SegundoQuadroStruct _value) {
-    _segundoQuadro.add(_value);
-    prefs.setStringList(
-        'ff_segundoQuadro', _segundoQuadro.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromSegundoQuadro(SegundoQuadroStruct _value) {
-    _segundoQuadro.remove(_value);
-    prefs.setStringList(
-        'ff_segundoQuadro', _segundoQuadro.map((x) => x.serialize()).toList());
-  }
-
-  void removeAtIndexFromSegundoQuadro(int _index) {
-    _segundoQuadro.removeAt(_index);
-    prefs.setStringList(
-        'ff_segundoQuadro', _segundoQuadro.map((x) => x.serialize()).toList());
-  }
-
-  void updateSegundoQuadroAtIndex(
-    int _index,
-    SegundoQuadroStruct Function(SegundoQuadroStruct) updateFn,
-  ) {
-    _segundoQuadro[_index] = updateFn(_segundoQuadro[_index]);
-    prefs.setStringList(
-        'ff_segundoQuadro', _segundoQuadro.map((x) => x.serialize()).toList());
-  }
-
-  void insertAtIndexInSegundoQuadro(int _index, SegundoQuadroStruct _value) {
-    _segundoQuadro.insert(_index, _value);
-    prefs.setStringList(
-        'ff_segundoQuadro', _segundoQuadro.map((x) => x.serialize()).toList());
-  }
-
   List<SocioEconomicoStruct> _socioEconoico = [];
   List<SocioEconomicoStruct> get socioEconoico => _socioEconoico;
   set socioEconoico(List<SocioEconomicoStruct> _value) {
@@ -415,6 +359,78 @@ class FFAppState extends ChangeNotifier {
   String get emprego => _emprego;
   set emprego(String _value) {
     _emprego = _value;
+  }
+
+  String _espontanea = '';
+  String get espontanea => _espontanea;
+  set espontanea(String _value) {
+    _espontanea = _value;
+  }
+
+  String _estimulada = '';
+  String get estimulada => _estimulada;
+  set estimulada(String _value) {
+    _estimulada = _value;
+  }
+
+  String _naoVotaria = '';
+  String get naoVotaria => _naoVotaria;
+  set naoVotaria(String _value) {
+    _naoVotaria = _value;
+  }
+
+  String _achaQVaiVencer = '';
+  String get achaQVaiVencer => _achaQVaiVencer;
+  set achaQVaiVencer(String _value) {
+    _achaQVaiVencer = _value;
+  }
+
+  String _vereador = '';
+  String get vereador => _vereador;
+  set vereador(String _value) {
+    _vereador = _value;
+  }
+
+  String _compara = '';
+  String get compara => _compara;
+  set compara(String _value) {
+    _compara = _value;
+  }
+
+  String _opiniaoMudar = '';
+  String get opiniaoMudar => _opiniaoMudar;
+  set opiniaoMudar(String _value) {
+    _opiniaoMudar = _value;
+  }
+
+  String _qd2Primeiro = '';
+  String get qd2Primeiro => _qd2Primeiro;
+  set qd2Primeiro(String _value) {
+    _qd2Primeiro = _value;
+  }
+
+  String _qd2Segundo = '';
+  String get qd2Segundo => _qd2Segundo;
+  set qd2Segundo(String _value) {
+    _qd2Segundo = _value;
+  }
+
+  String _eleitor = '';
+  String get eleitor => _eleitor;
+  set eleitor(String _value) {
+    _eleitor = _value;
+  }
+
+  String _emailEleitor = '';
+  String get emailEleitor => _emailEleitor;
+  set emailEleitor(String _value) {
+    _emailEleitor = _value;
+  }
+
+  String _telefoneEleitor = '';
+  String get telefoneEleitor => _telefoneEleitor;
+  set telefoneEleitor(String _value) {
+    _telefoneEleitor = _value;
   }
 }
 

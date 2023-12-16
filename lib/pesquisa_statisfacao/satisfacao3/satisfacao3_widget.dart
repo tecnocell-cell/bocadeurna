@@ -1,12 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -1150,7 +1147,7 @@ class _Satisfacao3WidgetState extends State<Satisfacao3Widget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   setState(() {
-                                    FFAppState().emprego = '1';
+                                    FFAppState().moradia = '1';
                                   });
                                 },
                                 child: Row(
@@ -1188,7 +1185,7 @@ class _Satisfacao3WidgetState extends State<Satisfacao3Widget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   setState(() {
-                                    FFAppState().emprego = '2';
+                                    FFAppState().moradia = '2';
                                   });
                                 },
                                 child: Row(
@@ -1226,7 +1223,7 @@ class _Satisfacao3WidgetState extends State<Satisfacao3Widget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   setState(() {
-                                    FFAppState().emprego = '3';
+                                    FFAppState().moradia = '3';
                                   });
                                 },
                                 child: Row(
@@ -1264,7 +1261,7 @@ class _Satisfacao3WidgetState extends State<Satisfacao3Widget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   setState(() {
-                                    FFAppState().emprego = '4';
+                                    FFAppState().moradia = '4';
                                   });
                                 },
                                 child: Row(
@@ -1308,7 +1305,7 @@ class _Satisfacao3WidgetState extends State<Satisfacao3Widget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   setState(() {
-                                    FFAppState().emprego = '5';
+                                    FFAppState().moradia = '5';
                                   });
                                 },
                                 child: Row(
@@ -1346,80 +1343,19 @@ class _Satisfacao3WidgetState extends State<Satisfacao3Widget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          if (_model.respostaNet!) {
-                            if (FFAppState().socioEconoico.length == 0) {
-                              await PopularidadeRecord.collection
-                                  .doc()
-                                  .set(createPopularidadeRecordData(
-                                    satisfacao: FFAppState().satisfacao1,
-                                    sentimento: FFAppState().satisfacao2,
-                                    economia: FFAppState().economia,
-                                    educacao: FFAppState().educacao,
-                                    saude: FFAppState().saude,
-                                    emprego: FFAppState().emprego,
-                                    moradia: FFAppState().moradia,
-                                  ));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Cliente Cadastrado',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
-                              );
+                          setState(() {
+                            FFAppState().addToPopularidade(PopularidadeStruct(
+                              satisfacao: FFAppState().satisfacao1,
+                              sentimento: FFAppState().satisfacao2,
+                              economia: FFAppState().economia,
+                              educacao: FFAppState().educacao,
+                              saude: FFAppState().saude,
+                              emprego: FFAppState().emprego,
+                              moradia: FFAppState().moradia,
+                            ));
+                          });
 
-                              context.pushNamed('espontaneaPrefeito');
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Sincronize os dados primeiro!',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
-                              );
-                            }
-                          } else {
-                            setState(() {
-                              FFAppState().addToPopularidade(PopularidadeStruct(
-                                satisfacao: FFAppState().satisfacao1,
-                                sentimento: FFAppState().satisfacao2,
-                                economia: FFAppState().economia,
-                                educacao: FFAppState().educacao,
-                                saude: FFAppState().saude,
-                                emprego: FFAppState().emprego,
-                                moradia: FFAppState().moradia,
-                              ));
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Cliente Cadastrado',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-
-                            context.pushNamed('espontaneaPrefeito');
-                          }
+                          context.pushNamed('espontanea');
                         },
                         text: 'Prosseguir',
                         options: FFButtonOptions(

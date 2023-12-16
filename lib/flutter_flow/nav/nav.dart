@@ -81,13 +81,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? SatisfacaoWidget() : LogarWidget(),
+          appStateNotifier.loggedIn ? EspontaneaWidget() : LogarWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? SatisfacaoWidget() : LogarWidget(),
+              appStateNotifier.loggedIn ? EspontaneaWidget() : LogarWidget(),
         ),
         FFRoute(
           name: 'Logar',
@@ -105,9 +105,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => OnboardingWidget(),
         ),
         FFRoute(
-          name: 'espontaneaPrefeito',
-          path: '/espontaneaPrefeito',
-          builder: (context, params) => EspontaneaPrefeitoWidget(),
+          name: 'espontanea',
+          path: '/espontanea',
+          builder: (context, params) => EspontaneaWidget(),
         ),
         FFRoute(
           name: 'recuperaSenha',
@@ -140,6 +140,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EstimuladaPrefeitoWidget(),
         ),
         FFRoute(
+          name: 'opiniaoMudar',
+          path: '/opiniaoMudar',
+          builder: (context, params) => OpiniaoMudarWidget(),
+        ),
+        FFRoute(
+          name: 'estimulada',
+          path: '/estimulada',
+          builder: (context, params) => EstimuladaWidget(),
+        ),
+        FFRoute(
+          name: 'achaQVaiVencer',
+          path: '/achaQVaiVencer',
+          builder: (context, params) => AchaQVaiVencerWidget(),
+        ),
+        FFRoute(
           name: 'naoVotaria',
           path: '/naoVotaria',
           builder: (context, params) => NaoVotariaWidget(),
@@ -148,16 +163,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'votoVereador',
           path: '/votoVereador',
           builder: (context, params) => VotoVereadorWidget(),
-        ),
-        FFRoute(
-          name: 'achaQVaiVencer',
-          path: '/achaQVaiVencer',
-          builder: (context, params) => AchaQVaiVencerWidget(),
-        ),
-        FFRoute(
-          name: 'opiniaoMudar',
-          path: '/opiniaoMudar',
-          builder: (context, params) => OpiniaoMudarWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

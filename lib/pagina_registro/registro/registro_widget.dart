@@ -316,7 +316,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                   }
 
                                   context.goNamedAuth(
-                                      'satisfacao', context.mounted);
+                                      'espontanea', context.mounted);
                                 },
                                 text: 'Criar Conta',
                                 options: FFButtonOptions(

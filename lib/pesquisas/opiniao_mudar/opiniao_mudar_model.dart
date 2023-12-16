@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -15,9 +17,12 @@ class OpiniaoMudarModel extends FlutterFlowModel<OpiniaoMudarWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  // State field(s) for op widget.
+  String? opValue;
+  FormFieldController<String>? opValueController;
+  // State field(s) for localdade widget.
+  String? localdadeValue;
+  FormFieldController<String>? localdadeValueController;
 
   /// Initialization and disposal methods.
 

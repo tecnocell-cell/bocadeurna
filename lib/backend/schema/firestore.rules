@@ -29,14 +29,14 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /segundoQuadro/{document} {
+    match /votacao/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;
       allow delete: if true;
     }
 
-    match /votacao/{document} {
+    match /intencaoVoto/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;

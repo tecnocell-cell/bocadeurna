@@ -1,5 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -863,111 +860,42 @@ class _SocioEconomicoWidgetState extends State<SocioEconomicoWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        if (_model.respostaNet!) {
-                          if (FFAppState().socioEconoico.length == 0) {
-                            await EleitoresRecord.collection
-                                .doc()
-                                .set(createEleitoresRecordData(
-                                  nome: _model.nomeCompletoController.text,
-                                  sexo: _model.sexoValue,
-                                  idade: _model.idadeValue,
-                                  escolaridade: _model.escolaridadeValue,
-                                  rendafamiliar: _model.rendaFamiliarValue,
-                                  localVotacao: _model.localVotoValue,
-                                  email: _model.emailController.text,
-                                  telefone: _model.telefoneController.text,
-                                ));
-                            setState(() {
-                              _model.rendaFamiliarValueController?.reset();
-                              _model.localVotoValueController?.reset();
-                              _model.idadeValueController?.reset();
-                              _model.sexoValueController?.reset();
-                              _model.escolaridadeValueController?.reset();
-                            });
-                            setState(() {
-                              _model.nomeCompletoController?.clear();
-                              _model.telefoneController?.clear();
-                              _model.emailController?.clear();
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Cliente Cadastrado',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-
-                            context.pushNamed('satisfacao');
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Sincronize os dados primeiro!',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                          }
-                        } else {
-                          if (_model.formKey.currentState == null ||
-                              !_model.formKey.currentState!.validate()) {
-                            return;
-                          }
-                          setState(() {
-                            FFAppState()
-                                .addToSocioEconoico(SocioEconomicoStruct(
-                              localVotacao: _model.localVotoValue,
-                              nome: _model.nomeCompletoController.text,
-                              sexo: _model.sexoValue,
-                              idade: _model.idadeValue,
-                              esolaridade: _model.escolaridadeValue,
-                              rendaFamiliar: _model.rendaFamiliarValue,
-                              email: _model.emailController.text,
-                              telefone: _model.telefoneController.text,
-                            ));
-                          });
-                          setState(() {
-                            _model.rendaFamiliarValueController?.reset();
-                            _model.localVotoValueController?.reset();
-                            _model.idadeValueController?.reset();
-                            _model.sexoValueController?.reset();
-                            _model.escolaridadeValueController?.reset();
-                          });
-                          setState(() {
-                            _model.nomeCompletoController?.clear();
-                            _model.telefoneController?.clear();
-                            _model.emailController?.clear();
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Cliente Cadastrado',
-                                style: TextStyle(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).secondary,
-                            ),
-                          );
-
-                          context.pushNamed('satisfacao');
+                        if (_model.formKey.currentState == null ||
+                            !_model.formKey.currentState!.validate()) {
+                          return;
                         }
+                        setState(() {
+                          FFAppState().addToSocioEconoico(SocioEconomicoStruct(
+                            localVotacao: _model.localVotoValue,
+                            nome: _model.nomeCompletoController.text,
+                            sexo: _model.sexoValue,
+                            idade: _model.idadeValue,
+                            esolaridade: _model.idadeValue,
+                            rendaFamiliar: _model.rendaFamiliarValue,
+                            email: _model.emailController.text,
+                            telefone: _model.telefoneController.text,
+                          ));
+                          FFAppState().eleitor =
+                              _model.nomeCompletoController.text;
+                          FFAppState().emailEleitor =
+                              _model.emailController.text;
+                          FFAppState().telefoneEleitor =
+                              _model.telefoneController.text;
+                        });
+                        setState(() {
+                          _model.rendaFamiliarValueController?.reset();
+                          _model.escolaridadeValueController?.reset();
+                          _model.sexoValueController?.reset();
+                          _model.idadeValueController?.reset();
+                          _model.localVotoValueController?.reset();
+                        });
+                        setState(() {
+                          _model.telefoneController?.clear();
+                          _model.emailController?.clear();
+                          _model.nomeCompletoController?.clear();
+                        });
+
+                        context.pushNamed('satisfacao');
                       },
                       text: 'Prosseguir',
                       options: FFButtonOptions(
