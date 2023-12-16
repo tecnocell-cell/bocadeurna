@@ -140,8 +140,10 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                color: FFAppState().qd2Primeiro ==
+                                        'Adriano Salomão'
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : Color(0x00000000),
                                 width: 1.0,
                               ),
                             ),
@@ -266,8 +268,10 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                color: FFAppState().qd2Primeiro ==
+                                        'José Barbosa de Farias/Emivaldo Amancio'
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : Color(0x00000000),
                                 width: 1.0,
                               ),
                             ),
@@ -517,8 +521,10 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                color:
+                                    FFAppState().qd2Segundo == 'Adriano Salomão'
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : Color(0x00000000),
                                 width: 1.0,
                               ),
                             ),
@@ -643,8 +649,10 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                color: FFAppState().qd2Segundo ==
+                                        'Emivaldo Amâncio/José Barboda de Farias'
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : Color(0x00000000),
                                 width: 1.0,
                               ),
                             ),

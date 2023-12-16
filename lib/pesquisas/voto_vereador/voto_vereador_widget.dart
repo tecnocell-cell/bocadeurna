@@ -55,7 +55,7 @@ class _VotoVereadorWidgetState extends State<VotoVereadorWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         title: Text(
-          'Expectativa de Vitória',
+          'Voto para Vereador',
           style: FlutterFlowTheme.of(context).headlineSmall.override(
                 fontFamily: 'Outfit',
                 color: FlutterFlowTheme.of(context).tertiary,
@@ -75,7 +75,7 @@ class _VotoVereadorWidgetState extends State<VotoVereadorWidget> {
               children: [
                 Flexible(
                   child: Text(
-                    'Qual dos candidatos abaixo você acha que vai vencer as eleições para prefeito em Santa Maria das Barreiras ?',
+                    'Em quem você votaria para Vereador em Santa Maria das Barreiras ?',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Outfit',
                           fontSize: 18.0,

@@ -181,7 +181,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             child: Image.asset(
                                               'assets/images/jobs_Creatives@2x.png',
                                               width: 350.0,
-                                              height: 252.0,
+                                              height: 200.0,
                                               fit: BoxFit.fitWidth,
                                             ),
                                           ),

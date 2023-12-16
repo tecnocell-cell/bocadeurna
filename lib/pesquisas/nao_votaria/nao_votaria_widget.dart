@@ -115,7 +115,7 @@ class _NaoVotariaWidgetState extends State<NaoVotariaWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
                             color:
-                                FFAppState().espontanea == candidatosItem.nome
+                                FFAppState().naoVotaria == candidatosItem.nome
                                     ? FlutterFlowTheme.of(context).primary
                                     : Color(0x00000000),
                             width: 1.0,
