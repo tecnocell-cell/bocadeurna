@@ -224,7 +224,7 @@ class _EspontaneaWidgetState extends State<EspontaneaWidget> {
               children: [
                 FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed('estimuladaPrefeito');
+                    context.pushNamed('estimulada');
                   },
                   text: 'Prosseguir',
                   options: FFButtonOptions(

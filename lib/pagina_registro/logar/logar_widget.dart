@@ -288,7 +288,7 @@ class _LogarWidgetState extends State<LogarWidget> {
                               }
 
                               context.goNamedAuth(
-                                  'espontanea', context.mounted);
+                                  'Onboarding', context.mounted);
                             },
                             text: 'Logar',
                             options: FFButtonOptions(

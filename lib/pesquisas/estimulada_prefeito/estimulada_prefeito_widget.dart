@@ -140,7 +140,8 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 width: 1.0,
                               ),
                             ),
@@ -235,32 +236,6 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                           ),
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Icons.check_box,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 24.0,
-                                              ),
-                                              Icon(
-                                                Icons.check_box_outline_blank,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 24.0,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
                                     ],
                                   ),
                                 ),
@@ -291,7 +266,8 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 width: 1.0,
                               ),
                             ),
@@ -475,29 +451,6 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Icon(
-                                          Icons.check_box,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        Icon(
-                                          Icons.check_box_outline_blank,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                      ],
                                     ),
                                   ],
                                 ),
@@ -564,7 +517,8 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 width: 1.0,
                               ),
                             ),
@@ -659,32 +613,6 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                           ),
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Icons.check_box,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 24.0,
-                                              ),
-                                              Icon(
-                                                Icons.check_box_outline_blank,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 24.0,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
                                     ],
                                   ),
                                 ),
@@ -715,7 +643,8 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                                 width: 1.0,
                               ),
                             ),
@@ -899,29 +828,6 @@ class _EstimuladaPrefeitoWidgetState extends State<EstimuladaPrefeitoWidget> {
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Icon(
-                                          Icons.check_box,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        Icon(
-                                          Icons.check_box_outline_blank,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                      ],
                                     ),
                                   ],
                                 ),
