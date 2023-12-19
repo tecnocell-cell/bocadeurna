@@ -238,7 +238,7 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
                             votoVereador: FFAppState().vereador,
                             emQuemVotaria: FFAppState().qd2Primeiro,
                             votoMudar: _model.opValue,
-                            agenteDePesquisa: currentUserDisplayName,
+                            agenteDePesquisa: currentUserReference?.id,
                             emQuemVotaria2: FFAppState().qd2Segundo,
                             localidade: _model.localdadeValue,
                             eleitor: FFAppState().eleitor,
