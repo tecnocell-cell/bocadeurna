@@ -81,13 +81,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? EspontaneaWidget() : LogarWidget(),
+          appStateNotifier.loggedIn ? OnboardingWidget() : LogarWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? EspontaneaWidget() : LogarWidget(),
+              appStateNotifier.loggedIn ? OnboardingWidget() : LogarWidget(),
         ),
         FFRoute(
           name: 'Logar',

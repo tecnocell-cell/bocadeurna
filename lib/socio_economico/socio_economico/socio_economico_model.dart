@@ -26,14 +26,38 @@ class SocioEconomicoModel extends FlutterFlowModel<SocioEconomicoWidget> {
   FocusNode? nomeCompletoFocusNode;
   TextEditingController? nomeCompletoController;
   String? Function(BuildContext, String?)? nomeCompletoControllerValidator;
+  String? _nomeCompletoControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailController;
   String? Function(BuildContext, String?)? emailControllerValidator;
+  String? _emailControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for telefone widget.
   FocusNode? telefoneFocusNode;
   TextEditingController? telefoneController;
   String? Function(BuildContext, String?)? telefoneControllerValidator;
+  String? _telefoneControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for localVoto widget.
   String? localVotoValue;
   FormFieldController<String>? localVotoValueController;
@@ -52,7 +76,11 @@ class SocioEconomicoModel extends FlutterFlowModel<SocioEconomicoWidget> {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    nomeCompletoControllerValidator = _nomeCompletoControllerValidator;
+    emailControllerValidator = _emailControllerValidator;
+    telefoneControllerValidator = _telefoneControllerValidator;
+  }
 
   void dispose() {
     unfocusNode.dispose();

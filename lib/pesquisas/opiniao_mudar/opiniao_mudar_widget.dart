@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -6,7 +7,11 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/instant_timer.dart';
+import '/custom_code/actions/index.dart' as actions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +35,18 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => OpiniaoMudarModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.instantTimer = InstantTimer.periodic(
+        duration: Duration(milliseconds: 3000),
+        callback: (timer) async {
+          _model.respostaNet = await actions.checkInternetConnection();
+          setState(() {});
+        },
+        startImmediately: true,
+      );
+    });
   }
 
   @override
@@ -220,35 +237,168 @@ class _OpiniaoMudarWidgetState extends State<OpiniaoMudarWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        setState(() {
-                          FFAppState().addToIntencaoVoto(IntencaoVotoStruct(
-                            pretendeVotarEspontanea: FFAppState().espontanea,
-                            pretendeVotaEstimulada: FFAppState().estimulada,
-                            naoVotaria: FFAppState().naoVotaria,
-                            achaqVaiVencer: FFAppState().achaQVaiVencer,
-                            votoVereador: FFAppState().vereador,
-                          ));
-                        });
-                        setState(() {
-                          FFAppState().addToVotacao(VotacaoStruct(
-                            pretendeVotarEspontanea: FFAppState().espontanea,
-                            pretendeVotarEstimulada: FFAppState().estimulada,
-                            naoVotaria: FFAppState().naoVotaria,
-                            achaQVaiVencer: FFAppState().achaQVaiVencer,
-                            votoVereador: FFAppState().vereador,
-                            emQuemVotaria: FFAppState().qd2Primeiro,
-                            votoMudar: _model.opValue,
-                            agenteDePesquisa: currentUserReference?.id,
-                            emQuemVotaria2: FFAppState().qd2Segundo,
-                            localidade: _model.localdadeValue,
-                            eleitor: FFAppState().eleitor,
-                            popularidade: FFAppState().satisfacao1,
-                            emailEleitor: FFAppState().emailEleitor,
-                            telefoneEleitor: FFAppState().telefoneEleitor,
-                          ));
-                        });
+                        if (_model.respostaNet!) {
+                          if (FFAppState().votacao.length == 0) {
+                            await EleitoresRecord.collection
+                                .doc()
+                                .set(createEleitoresRecordData(
+                                  nome: FFAppState().socioEconoico[0].nome,
+                                  sexo: FFAppState().socioEconoico[0].sexo,
+                                  idade: FFAppState().socioEconoico[0].idade,
+                                  escolaridade:
+                                      FFAppState().socioEconoico[0].esolaridade,
+                                  rendafamiliar: FFAppState()
+                                      .socioEconoico[0]
+                                      .rendaFamiliar,
+                                  localVotacao: FFAppState()
+                                      .socioEconoico[0]
+                                      .localVotacao,
+                                  email: FFAppState().socioEconoico[0].email,
+                                  telefone:
+                                      FFAppState().socioEconoico[0].telefone,
+                                ));
 
-                        context.pushNamed('Onboarding');
+                            await PopularidadeRecord.collection
+                                .doc()
+                                .set(createPopularidadeRecordData(
+                                  satisfacao: FFAppState().satisfacao1,
+                                  sentimento: FFAppState().satisfacao2,
+                                  economia: FFAppState().economia,
+                                  educacao: FFAppState().educacao,
+                                  saude: FFAppState().saude,
+                                  emprego: FFAppState().emprego,
+                                  moradia: FFAppState().moradia,
+                                ));
+
+                            await IntencaoVotoRecord.collection
+                                .doc()
+                                .set(createIntencaoVotoRecordData(
+                                  espontanea: FFAppState().espontanea,
+                                  estimulada: FFAppState().estimulada,
+                                  naoVotaria: FFAppState().naoVotaria,
+                                  acahaQVaiVencer: FFAppState().achaQVaiVencer,
+                                  votoVereador: FFAppState().vereador,
+                                ));
+
+                            await VotacaoRecord.collection
+                                .doc()
+                                .set(createVotacaoRecordData(
+                                  eleitor: FFAppState().eleitor,
+                                  popularidade: FFAppState().satisfacao1,
+                                  votoEspontaneo: FFAppState().espontanea,
+                                  votoEstimulado: FFAppState().estimulada,
+                                  naoVotaria: FFAppState().naoVotaria,
+                                  achaQVaiVencer: FFAppState().achaQVaiVencer,
+                                  votoVereador: FFAppState().vereador,
+                                  comparaVoto: FFAppState().qd2Primeiro,
+                                  votoMudar: _model.opValue,
+                                  localidade: _model.localdadeValue,
+                                  agenteDePesquisa: currentUserUid,
+                                  comparaVoto2: FFAppState().qd2Segundo,
+                                  emailEleitor: FFAppState().emailEleitor,
+                                  telefoneEleitor: FFAppState().telefoneEleitor,
+                                ));
+                            setState(() {
+                              FFAppState().satisfacao2 = '';
+                              FFAppState().satisfacao1 = '';
+                              FFAppState().economia = '';
+                              FFAppState().educacao = '';
+                              FFAppState().saude = '';
+                              FFAppState().moradia = '';
+                              FFAppState().emprego = '';
+                              FFAppState().espontanea = '';
+                              FFAppState().estimulada = '';
+                              FFAppState().naoVotaria = '';
+                              FFAppState().achaQVaiVencer = '';
+                              FFAppState().vereador = '';
+                              FFAppState().compara = '';
+                              FFAppState().opiniaoMudar = '';
+                              FFAppState().qd2Primeiro = '';
+                              FFAppState().qd2Segundo = '';
+                              FFAppState().eleitor = '';
+                              FFAppState().emailEleitor = '';
+                              FFAppState().telefoneEleitor = '';
+                            });
+
+                            context.pushNamed('Onboarding');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Sincronize os dados primeiro!',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                          }
+                        } else {
+                          setState(() {
+                            FFAppState().addToVotacao(VotacaoStruct(
+                              pretendeVotarEspontanea: FFAppState().espontanea,
+                              pretendeVotarEstimulada: FFAppState().estimulada,
+                              naoVotaria: FFAppState().naoVotaria,
+                              achaQVaiVencer: FFAppState().achaQVaiVencer,
+                              votoVereador: FFAppState().vereador,
+                              emQuemVotaria: FFAppState().qd2Primeiro,
+                              votoMudar: FFAppState().opiniaoMudar,
+                              localidade: _model.localdadeValue,
+                              emQuemVotaria2: FFAppState().qd2Segundo,
+                              eleitor: FFAppState().eleitor,
+                              popularidade: FFAppState().satisfacao1,
+                              emailEleitor: FFAppState().emailEleitor,
+                              telefoneEleitor: FFAppState().telefoneEleitor,
+                            ));
+                          });
+                          setState(() {
+                            FFAppState().addToIntencaoVoto(IntencaoVotoStruct(
+                              pretendeVotarEspontanea: FFAppState().espontanea,
+                              pretendeVotaEstimulada: FFAppState().estimulada,
+                              naoVotaria: FFAppState().naoVotaria,
+                              achaqVaiVencer: FFAppState().achaQVaiVencer,
+                              votoVereador: FFAppState().vereador,
+                            ));
+                          });
+                          setState(() {
+                            FFAppState().addToPopularidade(PopularidadeStruct(
+                              satisfacao: FFAppState().satisfacao1,
+                              sentimento: FFAppState().satisfacao2,
+                              economia: FFAppState().economia,
+                              educacao: FFAppState().educacao,
+                              saude: FFAppState().saude,
+                              emprego: FFAppState().emprego,
+                              moradia: FFAppState().moradia,
+                            ));
+                          });
+                          setState(() {
+                            FFAppState().satisfacao2 = '';
+                            FFAppState().satisfacao1 = '';
+                            FFAppState().economia = '';
+                            FFAppState().educacao = '';
+                            FFAppState().saude = '';
+                            FFAppState().moradia = '';
+                            FFAppState().emprego = '';
+                            FFAppState().espontanea = '';
+                            FFAppState().estimulada = '';
+                            FFAppState().naoVotaria = '';
+                            FFAppState().achaQVaiVencer = '';
+                            FFAppState().vereador = '';
+                            FFAppState().compara = '';
+                            FFAppState().opiniaoMudar = '';
+                            FFAppState().qd2Primeiro = '';
+                            FFAppState().qd2Segundo = '';
+                            FFAppState().eleitor = '';
+                            FFAppState().emailEleitor = '';
+                            FFAppState().telefoneEleitor = '';
+                          });
+
+                          context.pushNamed('Onboarding');
+                        }
                       },
                       text: 'Enviar Pesquisa',
                       options: FFButtonOptions(

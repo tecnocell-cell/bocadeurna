@@ -49,6 +49,7 @@ class _SincronizarWidgetState extends State<SincronizarWidget> {
               email: FFAppState().socioEconoico[0].email,
               telefone: FFAppState().socioEconoico[0].telefone,
             ));
+        // deletaSocioEconomico
         setState(() {
           FFAppState().removeAtIndexFromSocioEconoico(0);
         });
@@ -64,6 +65,7 @@ class _SincronizarWidgetState extends State<SincronizarWidget> {
               emprego: FFAppState().popularidade[0].emprego,
               moradia: FFAppState().popularidade[0].moradia,
             ));
+        // deletaPopularidade
         setState(() {
           FFAppState().removeAtIndexFromPopularidade(0);
         });
@@ -77,13 +79,14 @@ class _SincronizarWidgetState extends State<SincronizarWidget> {
               acahaQVaiVencer: FFAppState().intencaoVoto[0].achaqVaiVencer,
               votoVereador: FFAppState().intencaoVoto[0].votoVereador,
             ));
+        // deletaIntencaoVoto
         setState(() {
           FFAppState().removeAtIndexFromIntencaoVoto(0);
         });
 
         await VotacaoRecord.collection.doc().set(createVotacaoRecordData(
-              eleitor: FFAppState().socioEconoico[0].nome,
-              popularidade: FFAppState().popularidade[0].satisfacao,
+              eleitor: FFAppState().votacao[0].eleitor,
+              popularidade: FFAppState().votacao[0].popularidade,
               votoEspontaneo: FFAppState().votacao[0].pretendeVotarEspontanea,
               votoEstimulado: FFAppState().votacao[0].pretendeVotarEstimulada,
               naoVotaria: FFAppState().votacao[0].naoVotaria,
@@ -92,11 +95,12 @@ class _SincronizarWidgetState extends State<SincronizarWidget> {
               comparaVoto: FFAppState().votacao[0].emQuemVotaria,
               votoMudar: FFAppState().votacao[0].votoMudar,
               localidade: FFAppState().votacao[0].localidade,
-              agenteDePesquisa: FFAppState().votacao[0].agenteDePesquisa,
+              agenteDePesquisa: currentUserUid,
               comparaVoto2: FFAppState().votacao[0].emQuemVotaria2,
               emailEleitor: FFAppState().votacao[0].emailEleitor,
               telefoneEleitor: FFAppState().votacao[0].telefoneEleitor,
             ));
+        // deletaVotacao
         setState(() {
           FFAppState().removeAtIndexFromVotacao(0);
         });

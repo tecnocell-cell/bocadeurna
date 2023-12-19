@@ -95,7 +95,7 @@ class _SocioEconomicoWidgetState extends State<SocioEconomicoWidget> {
               ),
               Form(
                 key: _model.formKey,
-                autovalidateMode: AutovalidateMode.disabled,
+                autovalidateMode: AutovalidateMode.always,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -482,9 +482,9 @@ class _SocioEconomicoWidgetState extends State<SocioEconomicoWidget> {
                                         _model.localVotoValueController ??=
                                             FormFieldController<String>(null),
                                     options: [
-                                      'Masculino',
-                                      'Feminino',
-                                      'prefiro Nao Informar'
+                                      'EMEF - Jacinta Pires',
+                                      'Creche Municipal Cassia Maria',
+                                      'Castro Alves'
                                     ],
                                     onChanged: (val) => setState(
                                         () => _model.localVotoValue = val),
@@ -864,6 +864,21 @@ class _SocioEconomicoWidgetState extends State<SocioEconomicoWidget> {
                             !_model.formKey.currentState!.validate()) {
                           return;
                         }
+                        if (_model.localVotoValue == null) {
+                          return;
+                        }
+                        if (_model.idadeValue == null) {
+                          return;
+                        }
+                        if (_model.sexoValue == null) {
+                          return;
+                        }
+                        if (_model.escolaridadeValue == null) {
+                          return;
+                        }
+                        if (_model.rendaFamiliarValue == null) {
+                          return;
+                        }
                         setState(() {
                           FFAppState().addToSocioEconoico(SocioEconomicoStruct(
                             localVotacao: _model.localVotoValue,
@@ -919,6 +934,28 @@ class _SocioEconomicoWidgetState extends State<SocioEconomicoWidget> {
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          setState(() {
+                            FFAppState().popularidade = [];
+                            FFAppState().intencaoVoto = [];
+                            FFAppState().socioEconoico = [];
+                            FFAppState().votacao = [];
+                          });
+                        },
+                        child: Text(
+                          'limpar',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
                       ),
                     ),
                   ],
